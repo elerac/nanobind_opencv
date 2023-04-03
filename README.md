@@ -45,7 +45,7 @@ cv::Mat_<_Tp> inspect(const cv::Mat_<_Tp> mat)
 
 NB_MODULE(example_ext, m)
 {
-    m.def("inspect", &inspect<cv::Vec3f>, nb::arg("mat").noconvert());
+    m.def("inspect", &inspect<float>, nb::arg("mat").noconvert());
 }
 ```
 
