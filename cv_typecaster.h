@@ -38,7 +38,6 @@ struct type_caster<T, enable_if_t<is_base_of_template_v<T, cv::Mat_>>>
         const NDArray &array = caster.value;
         int rows = array.shape(0);
         int cols = array.shape(1);
-        // value = T(rows, cols, (_Tp *)array.data());
 
         value.create(rows, cols);
         memcpy(value.data, array.data(), rows * cols * channels * sizeof(channel_type));
