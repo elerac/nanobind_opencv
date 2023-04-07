@@ -11,11 +11,7 @@ The supported types are:
 ## Build
 
 ```bash
-cmake -S . -B build
-```
-
-```
-cmake --build build
+pip3 install .
 ```
 
 ## Example
@@ -32,18 +28,16 @@ namespace nb = nanobind;
 using namespace nb::literals;
 
 template <typename _Tp>
-cv::Mat_<_Tp> inspect(const cv::Mat_<_Tp> mat)
+void inspect(const cv::Mat_<_Tp> mat)
 {
     std::cout << "[C++] Inspect cv::Mat_<_Tp>" << std::endl;
     std::cout << "        rows: " << mat.rows << std::endl;
     std::cout << "        cols: " << mat.cols << std::endl;
     std::cout << "        channels: " << mat.channels() << std::endl;
     std::cout << "        type: " << cv::typeToString(mat.type()) << std::endl;
-    return mat;
 }
 
-
-NB_MODULE(example_ext, m)
+NB_MODULE(_nanobind_opencv_example_impl, m)
 {
     m.def("inspect", &inspect<float>, nb::arg("mat").noconvert());
 }
@@ -53,18 +47,18 @@ In Python:
 
 ```python
 import numpy as np
-from build import example_ext
+from nanobind_opencv_example import inspect
 
 # Prepare numpy data
 array = np.random.rand(128, 256).astype(np.float32)
 
-# Inspect numpy data
+# Inspect numpy data in Python
 print("[Py]  Inspect np.ndarray")
 print("        shape: ", array.shape)
 print("        dtype: ", array.dtype)
 
 # Pass numpy data to C++ and inspect it as cv::Mat_<_Tp>
-example_ext.inspect(array)
+inspect(array)
 ```
 
 After running the above example, the output should be:
