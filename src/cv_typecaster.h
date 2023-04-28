@@ -115,8 +115,6 @@ struct type_caster<T, enable_if_t<std::is_same_v<T, cv::Vec<typename T::value_ty
 
     bool from_python(handle src, uint8_t flags, cleanup_list *cleanup) noexcept
     {
-        std::cout << "from_python" << std::endl;
-
         // Check if src is ndarray
         NDArrayCaster caster;
         bool is_valid_ndarray = caster.from_python(src, flags, cleanup);
