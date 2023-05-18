@@ -1,6 +1,6 @@
 # nanobind - opencv typecaster
 
-This repository probides a [nanobind](https://github.com/wjakob/nanobind) typecaster for opencv types.
+This repository provides a [nanobind](https://github.com/wjakob/nanobind) typecaster for opencv types.
 
 The supported types are:
 
