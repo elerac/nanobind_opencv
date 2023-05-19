@@ -94,9 +94,12 @@ struct type_caster<T, enable_if_t<is_base_of_template_v<T, cv::Mat_>>>
     }
 };
 
+template <typename T>
+using is_vec_or_matx = std::disjunction<std::is_same<T, cv::Vec<typename T::value_type, T::channels>>, std::is_same<T, cv::Matx<typename T::value_type, T::rows, T::cols>>>;
+
 // Type caster for cv::Vec or cv::Matx
 template <typename T>
-struct type_caster<T, enable_if_t<std::is_same_v<T, cv::Vec<typename T::value_type, T::channels>> || std::is_same_v<T, cv::Matx<typename T::value_type, T::rows, T::cols>>>>
+struct type_caster<T, enable_if_t<is_vec_or_matx<T>::value>>
 {
 
     // Info about cv::Vec or cv::Matx
